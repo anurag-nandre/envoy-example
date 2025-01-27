@@ -1,0 +1,5 @@
+steps:
+  - label: ":docker: Build and Publish image"
+    plugins:
+      - ssh://git@code.hq.twilio.com/twilio/docker-buildkite-plugin.git#${TWILIO_DOCKER_PLUGIN_VERSION?}:
+          action: build_and_publish
