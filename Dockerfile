@@ -1,5 +1,5 @@
 
-FROM python:3.9-slim
+FROM registry.twilio.com/library/python/3.9-slim
 
 WORKDIR /app
 
