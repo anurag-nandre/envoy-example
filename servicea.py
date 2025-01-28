@@ -7,7 +7,7 @@ SERVICE_B_URL = "http://localhost:10000"  # Envoy proxy for Service B
 
 @app.route('/')
 def home():
-    return "Hello from Service A!"
+    return "Hello from Service !"
 
 @app.route('/serviceB', methods=['GET'])
 def call_serviceB():
