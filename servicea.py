@@ -7,7 +7,7 @@ SERVICE_B_URL = "http://localhost:10000"  # Envoy proxy for Service B
 
 @app.route('/')
 def home():
-    return "Hello from Service !"
+    return "Hello from Service A!"
 
 @app.route('/serviceB', methods=['GET'])
 def call_serviceB():
@@ -27,10 +27,6 @@ def call_serviceC():
     except requests.exceptions.RequestException as e:
         return jsonify(message="Request to Service B failed", error=str(e)), 500
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)  # Service A listens on port
-
-
 @app.route('/healthcheck', methods=['GET'])
 def call_service_healthcheck():
     try:
@@ -38,3 +34,8 @@ def call_service_healthcheck():
         return jsonify(message="Request to  healthcheck succeeded", serviceB_response=response.json()), response.status_code
     except requests.exceptions.RequestException as e:
         return jsonify(message="Request to healthcheck failed", error=str(e)), 500
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)  # Service A listens on port
+
+
