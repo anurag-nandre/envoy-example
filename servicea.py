@@ -4,7 +4,7 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 
 SERVICE_B_URL = "http://localhost:10000"  # Envoy proxy for Service B
-SERVICE_B_URL = "http://localhost:10000"
+
 @app.route('/')
 def home():
     return "Hello from Service A!"
@@ -29,3 +29,12 @@ def call_serviceC():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)  # Service A listens on port
+
+
+@app.route('/healthcheck', methods=['GET'])
+def call_service_healthcheck():
+    try:
+        response = requests.get(f"{SERVICE_B_URL}/healthcheck", timeout=5)
+        return jsonify(message="Request to  healthcheck succeeded", serviceB_response=response.json()), response.status_code
+    except requests.exceptions.RequestException as e:
+        return jsonify(message="Request to healthcheck failed", error=str(e)), 500
