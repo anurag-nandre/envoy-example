@@ -36,6 +36,7 @@ def call_service_healthcheck():
         return jsonify(message="Request to healthcheck failed", error=str(e)), 500
 
 if __name__ == '__main__':
+    port = int(os.getenv('PORT', 8080))
     app.run(host='0.0.0.0', port=8080)  # Service A listens on port
 
 
