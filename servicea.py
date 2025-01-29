@@ -1,5 +1,7 @@
+import os
 import requests
 from flask import Flask, jsonify
+
 
 app = Flask(__name__)
 
@@ -37,6 +39,6 @@ def call_service_healthcheck():
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 8080))
-    app.run(host='0.0.0.0', port=8080)  # Service A listens on port
+    app.run(host='0.0.0.0', port=port)  # Service A listens on port
 
 
