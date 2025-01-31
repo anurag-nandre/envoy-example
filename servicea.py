@@ -11,6 +11,12 @@ SERVICE_B_URL = "http://localhost:10000"  # Envoy proxy for Service B
 def home():
     return "Hello from Service A!"
 
+
+@app.route('/delay')
+def delay():
+    time.sleep(60)
+    return "Delay response from service A"
+
 @app.route('/serviceB', methods=['GET'])
 def call_serviceB():
     try:
