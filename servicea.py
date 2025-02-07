@@ -28,6 +28,15 @@ def call_delayed_endpoint():
     except requests.exceptions.RequestException as e:
         return jsonify(message="Request to Service B failed", error=str(e)), 500
 
+@app.route('/callDelayEndpointWithTimeout', methods=['GET'])
+def call_delayed_endpoint_with_timeout():
+    try:
+        # Forward the request to Service B
+        response = requests.get(f"http://localhost:12000/delay", timeout=5)
+        return jsonify(message="Request to Service succeeded", serviceB_response=response.text), response.status_code
+    except requests.exceptions.RequestException as e:
+        return jsonify(message="Request to Service B failed", error=str(e)), 500
+
 @app.route('/serviceB', methods=['GET'])
 def call_serviceB():
     try:
